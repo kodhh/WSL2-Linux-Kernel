@@ -2,9 +2,9 @@ name: Build WSL2 Kernel with Clang
 
 on:
   push:
-    branches: [ main ]
+    branches: [ linux-msft-wsl-6.6.y ]
   pull_request:
-    branches: [ main ]
+    branches: [ linux-msft-wsl-6.6.y ]
 
 jobs:
   build:
