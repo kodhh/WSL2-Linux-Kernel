@@ -19,7 +19,7 @@ jobs:
       run: |
         # 在Ubuntu上安装Clang及编译依赖（示例命令，具体包名请根据你的WSL2内核需求调整）
         sudo apt-get update
-        sudo apt-get install -y clang make build-essential ncurses-dev libssl-dev bc flex bison libelf-dev dwarves
+        sudo apt-get install -y clang build-essential flex bison dwarves libssl-dev libelf-dev cpio qemu-utils
 
     - name: Configure Kernel (示例)
       run: |
