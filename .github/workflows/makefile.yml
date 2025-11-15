@@ -25,10 +25,17 @@ jobs:
       run: |
         # 此处为示例配置命令，请替换为你的WSL2内核实际配置命令
         # 例如：make ARCH=x86_64 CC=clang defconfig
-        make ARCH=x86_64 CC=clang lto_defconfig
+        make ARCH=x86_64 CC=clang lto_defconfig O=out
 
     - name: Build Kernel with Clang
       run: |
         # 此处为示例编译命令，请替换为你的WSL2内核实际编译命令
         # 例如：make ARCH=x86_64 CC=clang -j$(nproc)
-        make ARCH=x86_64 CC=clang -j$(nproc)
+        make ARCH=x86_64 CC=clang O=out -j$(nproc)
+
+    # 可选：上传构建产物
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: kernel-build
+        path: out/arch/x86_64/boot/bzImage
