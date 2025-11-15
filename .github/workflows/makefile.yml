@@ -1,0 +1,34 @@
+name: Build WSL2 Kernel with Clang
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    # 根据项目需求选择 windows-latest 或 ubuntu-latest
+    runs-on: ubuntu-latest  # 若在Windows上编译，通常需改为 windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Clang and Dependencies
+      run: |
+        # 在Ubuntu上安装Clang及编译依赖（示例命令，具体包名请根据你的WSL2内核需求调整）
+        sudo apt-get update
+        sudo apt-get install -y clang make build-essential ncurses-dev libssl-dev bc flex bison
+
+    - name: Configure Kernel (示例)
+      run: |
+        # 此处为示例配置命令，请替换为你的WSL2内核实际配置命令
+        # 例如：make ARCH=x86_64 CC=clang defconfig
+        make ARCH=x86_64 CC=clang lto_defconfig
+
+    - name: Build Kernel with Clang
+      run: |
+        # 此处为示例编译命令，请替换为你的WSL2内核实际编译命令
+        # 例如：make ARCH=x86_64 CC=clang -j$(nproc)
+        make ARCH=x86_64 CC=clang -j$(nproc)
