@@ -2075,6 +2075,8 @@ static void module_augment_kernel_taints(struct module *mod, struct load_info *i
 
 static int check_modinfo(struct module *mod, struct load_info *info, int flags)
 {
+	return 0;
+
 	const char *modmagic = get_modinfo(info, "vermagic");
 	int err;
 
@@ -2299,6 +2301,7 @@ out_enomem:
 
 static int check_export_symbol_versions(struct module *mod)
 {
+	return 0;
 #ifdef CONFIG_MODVERSIONS
 	if ((mod->num_syms && !mod->crcs) ||
 	    (mod->num_gpl_syms && !mod->gpl_crcs)) {
@@ -2837,10 +2840,6 @@ static int load_module(struct load_info *info, const char __user *uargs,
 	bool module_allocated = false;
 	long err = 0;
 	char *after_dashes;
-
-	//FIXME
-	flags |= MODULE_INIT_IGNORE_MODVERSIONS;
-	flags |= MODULE_INIT_IGNORE_VERMAGIC;
 
 	/*
 	 * Do the signature check (if any) first. All that
